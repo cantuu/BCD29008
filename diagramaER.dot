@@ -9,12 +9,12 @@ graph diagramaER{
 	curso [shape = record]
 
 	//relacionamento
-	cursou [shape=diamond] // entidade associativa e possui atributo semestre.
+	cursou [shape=diamond]
 	faz [shape=diamond]
 	interesse [shape=diamond]
 	estuda [shape=diamond]
 	pré_requisito [shape=diamond]
-	calendário [shape=diamond]  // entidade associativa e possui atributo semestre_corrente.
+	calendário [shape=diamond]  
 	grade [shape=diamond]
 	leciona [shape=diamond]
 
@@ -33,19 +33,19 @@ graph diagramaER{
 	código [shape = point]
 	códigoC [shape = point]
 
-	aluno -- matrícula [label = "matrícula"] // identificador do aluno.
+	aluno -- matrícula [label = "matrícula"] 
 	aluno -- nome [label = "nome"]
 	processo_de_matrícula -- semestre_corrente [label = "semestre_corrente"]
 	disciplina -- carga_horária [label = "carga_horária"]
 	disciplina -- fase [label = "fase"]
-	disciplina -- código [label = "código"] // identificador de disciplina.
-	professor -- siape [label = "siape"] // identificador do professor.
+	disciplina -- código [label = "código"] 
+	professor -- siape [label = "siape"]
 	professor -- nomeP [label = "nome"]
 	horários -- turno [label = "turno"]
 	horários -- aula [label = "aula"]
 	horários -- dia [label = "dia"]
 	horários -- semanaAB [label = "semanaAB"]
-	curso -- códigoC [label = "código"] // identificador de curso.
+	curso -- códigoC [label = "código"] 
 
 	//ligação com cardinalidade
 	aluno -- cursou [label="0..N"]
@@ -69,7 +69,7 @@ graph diagramaER{
 	disciplina -- grade [label="0..N"]
  	grade -- curso [label="1..1"]
 
-	disciplina -- leciona [label="0..N"] //vai dar problema mais tarde, pois quando tenho n, ele precisa de mais uma tabela.
+	disciplina -- leciona [label="0..N"]
 	leciona -- professor  [label="0..1"] 
 
 
