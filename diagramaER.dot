@@ -1,43 +1,77 @@
-graph diagramaER {
+graph diagramaER{
 
-	//Entidades
-	Aluno [shape = record]
-	Processo_de_Matrícula [shape = record]
-	Disciplina [shape = record]
-	Horários [shape = record]
-	Professor [shape = record]
-	Curso [shape = record]
+	//entidades
+	aluno [shape = record]
+	disciplina [shape = record]
+	processo_de_matrícula [shape = record]
+	horários [shape = record]
+	professor [shape = record]
+	curso [shape = record]
 
-	//Atributos
-	Nome [shape = point]
-	Matricula [shape = point]
-	Semestre_corrente [shape = point]
-	Carga_horaria [shape = point]
-	Turno [shape = point]
+	//relacionamento
+	cursou [shape=diamond] // entidade associativa e possui atributo semestre.
+	faz [shape=diamond]
+	interesse [shape=diamond]
+	estuda [shape=diamond]
+	pré_requisito [shape=diamond]
+	calendário [shape=diamond]  // entidade associativa e possui atributo semestre_corrente.
+	grade [shape=diamond]
+	leciona [shape=diamond]
 
-	//Relacionamentos
-	faz [shape = diamond]	
-	cursou [shape = diamond]
-	pré_requisito [shape = diamond]
-	interesse [shape = diamond]
-	calendário [shape = diamond]
-	estuda [shape = diamond]
-	leciona [shape = diamond]
-	grade [shape = diamond]
+	//atributos
+	matrícula [shape = point]
+	nome [shape = point]
+	semestre_corrente [shape = point]
+	carga_horária  [shape = point]
+	fase  [shape = point]
+	siape  [shape = point]
+	turno  [shape = point]
+	aula [shape = point]
+	dia  [shape = point]
+	semanaAB  [shape = point]
+	nomeP [shape = point]
+	código [shape = point]
+	códigoC [shape = point]
 
-	//Ligação
-	Aluno -- faz -- Processo_de_Matrícula
-	Aluno -- estuda -- Curso
-	Aluno -- cursou -- Disciplina
-	Processo_de_Matrícula -- interesse -- Disciplina
-	Disciplina -- calendário -- Horários
-	Disciplina -- pré_requisito -- Disciplina
-	Disciplina -- leciona -- Professor
-	Disciplina -- grade -- Curso
-	
-	Aluno -- Nome
-	Aluno -- Matricula
-	Processo_de_Matrícula -- Semestre_corrente
-	Disciplina -- Carga_horaria
-	Horários -- Turno	
+	aluno -- matrícula [label = "matrícula"] // identificador do aluno.
+	aluno -- nome [label = "nome"]
+	processo_de_matrícula -- semestre_corrente [label = "semestre_corrente"]
+	disciplina -- carga_horária [label = "carga_horária"]
+	disciplina -- fase [label = "fase"]
+	disciplina -- código [label = "código"] // identificador de disciplina.
+	professor -- siape [label = "siape"] // identificador do professor.
+	professor -- nomeP [label = "nome"]
+	horários -- turno [label = "turno"]
+	horários -- aula [label = "aula"]
+	horários -- dia [label = "dia"]
+	horários -- semanaAB [label = "semanaAB"]
+	curso -- códigoC [label = "código"] // identificador de curso.
+
+	//ligação com cardinalidade
+	aluno -- cursou [label="0..N"]
+	cursou -- disciplina [label="0..N"]
+
+	aluno -- faz  [label="1..1"]
+	faz -- processo_de_matrícula [label="1..1"]
+
+	aluno -- estuda [label="0..N"]  
+	estuda -- curso [label="1..N"] 
+
+	processo_de_matrícula -- interesse [label="0..N"] 
+	interesse -- disciplina [label="0..N"]
+
+	disciplina -- pré_requisito [label="1..1"]
+	pré_requisito -- disciplina [label="0..N"]
+
+	disciplina -- calendário [label="0..N"]
+	calendário -- horários [label="0..N"]
+
+	disciplina -- grade [label="0..N"]
+ 	grade -- curso [label="1..1"]
+
+	disciplina -- leciona [label="0..N"] //vai dar problema mais tarde, pois quando tenho n, ele precisa de mais uma tabela.
+	leciona -- professor  [label="0..1"] 
+
+
+
 }
